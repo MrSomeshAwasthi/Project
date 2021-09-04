@@ -1,7 +1,7 @@
-import pygame # these are just header file it will import pygame from python module
+import pygame 
 import random
-colors = [(102, 157, 179),#it is a list which consist of tuple
-          (227, 224, 132),#where i will use these tuple as colour for tetris block
+colors = [(102, 157, 179),
+          (227, 224, 132),
           (168, 156, 148),
           (255,  79,  88),
           (255, 187,  51),
@@ -10,7 +10,7 @@ colors = [(102, 157, 179),#it is a list which consist of tuple
 class Figure:
     x = 0
     y = 0
-    shapes = [ [[2,6,10,14], [8,9,10,11]],#determining of shapes
+    shapes = [ [[2,6,10,14], [8,9,10,11]],
                [[4,5,9,10],[2,6,5,9]],
                [[5,6,8,9],[1,5,6,10]],
                [[1,2,5,9],[4,5,6,10],[1,5,9,8],[0,4,5,6]],
@@ -18,17 +18,17 @@ class Figure:
                [[1,4,5,6],[1,5,6,9],[4,5,6,9],[1,4,5,9]],
                [[5,6,9,10]]]
 
-    def __init__(self, x, y):                      # using constructor to initilize some variable
+    def __init__(self, x, y):                      
         self.x = x
         self.y = y
-        self.type=random.randint(0,len(self.shapes)-1)   #it will tell which shape is coming next
-        self.color=random.randint(0,len(colors)-1)    #it will tell what will be the colour of it
-        self.rotation=0                                #use to check rotation
+        self.type=random.randint(0,len(self.shapes)-1)  
+        self.color=random.randint(0,len(colors)-1)   
+        self.rotation=0                                
     def image(self):
         return self.shapes [self.type] [self.rotation]
     def rotate(self):
         self.rotation=(self.rotation + 1) % len(self.shapes[self.type])
-class Tetris:#it is an another class use to give structure to project
+class Tetris:
     level = 2
     score = 0
     state = "start"
@@ -52,8 +52,8 @@ class Tetris:#it is an another class use to give structure to project
             self.field.append(new_line)
     def new_figure(self):
         self.figure=Figure(3, 0)
-    def intersects(self):#it checks the if there is any intersection
-        a=False    #where a is intersection
+    def intersects(self):
+        a=False    
         for i in range(4):
             for j in range(4):
                 if i*4+j in self.figure.image():
@@ -63,7 +63,7 @@ class Tetris:#it is an another class use to give structure to project
                             self.field[i + self.figure.y][j + self.figure.x] > 0:
                         a=True
         return a
-    def break_lines(self):      # used to check break line
+    def break_lines(self):     
         lines = 0
         for i in range(1, self.height):
             zeros = 0
@@ -105,16 +105,14 @@ class Tetris:#it is an another class use to give structure to project
         self.figure.rotate()
         if self.intersects():
             self.figure.rotation = old_rotation
-pygame.init()#Initialize the game engine
-icon = pygame.image.load('icon.png') #use to display icon
+pygame.init()
+icon = pygame.image.load('icon.png') 
 pygame.display.set_icon(icon)
-BLACK = (0, 0, 0)# Define some colors
-WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 GRAY = (128, 128, 128)
 size = (400, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Modern Tetris")
-# Loop until the user clicks the close button.
 done = False
 clock = pygame.time.Clock()
 fps = 60
