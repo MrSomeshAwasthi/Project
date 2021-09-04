@@ -24,18 +24,18 @@ def encode(msg):
 def decode(msg):
     msg += ' '
     dmsg = ''
-    citext = ''
+    a = ''
     for letter in msg:
         if ( letter != ' '):
             i = 0
-            citext += letter
+            a += letter
         else:
             i += 1
             if i == 2 :
                 dmsg += ' '
             else:
-                dmsg += list(MORSE_DICT.keys())[list(MORSE_DICT.values()).index(citext)]
-                citext = ''
+                dmsg += list(MORSE_DICT.keys())[list(MORSE_DICT.values()).index(a)]
+                a = ''
     return dmsg
 
 
